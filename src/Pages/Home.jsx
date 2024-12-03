@@ -2,8 +2,10 @@
 
 const Home = () => {
     return (
-        <div>
+        <div className="text-3xl">
             Home
+
+            <button className="btn btn-error">Done</button>
         </div>
     );
 };
