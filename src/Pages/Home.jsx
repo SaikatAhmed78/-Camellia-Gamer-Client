@@ -1,11 +1,16 @@
+import Banner from "../Components/Banner";
+import ExtraSectionOne from "../Components/ExtraSectionOne";
+import ExtraSectionTwo from "../Components/ExtraSectionTwo";
+import HighestRated from "../Components/HighestRated";
 
 
 const Home = () => {
     return (
-        <div className="text-3xl">
-            Home
-
-            <button className="btn btn-error">Done</button>
+        <div className="">
+            <Banner></Banner>
+            <HighestRated></HighestRated>
+            <ExtraSectionOne></ExtraSectionOne>
+            <ExtraSectionTwo></ExtraSectionTwo>
         </div>
     );
 };
