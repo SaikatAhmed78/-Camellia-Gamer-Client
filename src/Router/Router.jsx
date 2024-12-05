@@ -3,7 +3,10 @@ import MainLayout from "../Main/MainLayout";
 import ErrorPage from "../Pages/ErrorPage";
 import Home from "../Pages/Home";
 import SignIn from "../Pages/SignIn";
-import SignUp from "../Pages/Register";
+import Register from "../Pages/Register";
+import AllReviews from "../Pages/AllReviews";
+import AddReview from "../Pages/AddReview";
+import MyReviews from "../Pages/MyReviews";
 
 const router = createBrowserRouter([
     {
@@ -17,11 +20,23 @@ const router = createBrowserRouter([
             },
             {
                 path: '/register',
-                element: <SignUp></SignUp>
+                element: <Register></Register>
             },
             {
                 path: '/login',
                 element: <SignIn></SignIn>
+            },
+            {
+                path: '/allReviews',
+                element: <AllReviews></AllReviews>
+            },
+            {
+                path: '/addReview',
+                element: <AddReview></AddReview>
+            },
+            {
+                path: '/myReviews',
+                element: <MyReviews></MyReviews>
             },
         ]
         

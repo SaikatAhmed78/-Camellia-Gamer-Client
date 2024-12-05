@@ -1,10 +1,9 @@
 import { createContext, useState, useEffect } from "react";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
 import { auth } from "../Firebase/firebase.init";
-
+import Swal from 'sweetalert2';
 
 export const AuthContext = createContext();
-
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
@@ -18,9 +17,119 @@ const AuthProvider = ({ children }) => {
         return () => unsubscribe();
     }, []);
 
+    const registerUser = async (email, password) => {
+        try {
+            const result = await createUserWithEmailAndPassword(auth, email, password);
+            Swal.fire({
+                icon: 'success',
+                title: 'Registration successful!',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            return result.user;
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Registration failed!',
+                text: 'Please try again.',
+            });
+            throw error;
+        }
+    };
+
+    const signInUser = async (email, password) => {
+        try {
+            const result = await signInWithEmailAndPassword(auth, email, password);
+            setUser(result.user);
+            Swal.fire({
+                icon: 'success',
+                title: 'Login successful!',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            return result.user;
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Login failed!',
+                text: 'Please check your credentials and try again.',
+            });
+            throw error;
+        }
+    };
+
+    const googleProvider = new GoogleAuthProvider();
+    const githubProvider = new GithubAuthProvider();
+
+    const signInWithGoogle = async () => {
+        try {
+            const result = await signInWithPopup(auth, googleProvider);
+            setUser(result.user);
+            Swal.fire({
+                icon: 'success',
+                title: 'Google login successful!',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            return result.user;
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Google login failed!',
+                text: 'Please try again.',
+            });
+            throw error;
+        }
+    };
+
+    const signInWithGithub = async () => {
+        try {
+            const result = await signInWithPopup(auth, githubProvider);
+            setUser(result.user);
+            Swal.fire({
+                icon: 'success',
+                title: 'GitHub login successful!',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            return result.user;
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'GitHub login failed!',
+                text: 'Please try again.',
+            });
+            throw error;
+        }
+    };
+
+    const logout = async () => {
+        try {
+            await signOut(auth);
+            setUser(null);
+            Swal.fire({
+                icon: 'success',
+                title: 'Logout successful!',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Logout failed!',
+                text: 'Please try again.',
+            });
+        }
+    };
+
     const authInfo = {
         user,
-        loading
+        loading,
+        registerUser,
+        signInUser,
+        signInWithGoogle,
+        signInWithGithub,
+        logout
     };
 
     return (
