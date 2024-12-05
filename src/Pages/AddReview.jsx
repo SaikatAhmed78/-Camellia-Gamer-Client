@@ -1,10 +1,12 @@
 import React, { useState, useContext } from 'react';
 import { AuthContext } from '../Provider/AuthProvider';
-import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
 import { FaStar } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 const AddReview = () => {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [rating, setRating] = useState(0);
@@ -15,7 +17,11 @@ const AddReview = () => {
   const handleAddReview = (e) => {
     e.preventDefault();
     if (!user) {
-      toast.error('You need to be logged in to add a review.');
+      Swal.fire({
+        icon: 'error',
+        title: 'You need to be logged in to add a review.',
+      });
+      navigate('/login');
       return;
     }
 
@@ -26,6 +32,7 @@ const AddReview = () => {
       year,
       genre,
       userEmail: user.email,
+      userName: user.displayName,
       userPhoto: user.photoURL
     };
 
@@ -36,8 +43,14 @@ const AddReview = () => {
     })
       .then((response) => {
         if (response.ok) {
-          toast.success('Review added successfully!');
+          Swal.fire({
+            icon: 'success',
+            title: 'Review added successfully!',
+            showConfirmButton: false,
+            timer: 1500
+          });
           setTitle('');
+          setCoverImage('');
           setDescription('');
           setRating(0);
           setYear('');
@@ -47,7 +60,11 @@ const AddReview = () => {
         }
       })
       .catch((error) => {
-        toast.error('Failed to add review. Please try again.');
+        Swal.fire({
+          icon: 'error',
+          title: 'Failed to add review!',
+          text: 'Please try again.',
+        });
         console.error('Error:', error);
       });
   };
@@ -57,6 +74,7 @@ const AddReview = () => {
       <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
         <h2 className="text-3xl font-bold text-center mb-6 text-[#6B46C1]">Add New Review</h2>
         <form onSubmit={handleAddReview} className="space-y-6">
+        
           <div>
             <label htmlFor="title" className="block text-sm font-medium text-gray-700">Game Title</label>
             <input
@@ -121,15 +139,42 @@ const AddReview = () => {
           </div>
           <div>
             <label htmlFor="genre" className="block text-sm font-medium text-gray-700">Genre</label>
-            <input
-              type="text"
+            <select
               id="genre"
               name="genre"
-              placeholder="Enter the game genre"
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-[#6B46C1] focus:border-[#6B46C1]"
               value={genre}
               onChange={(e) => setGenre(e.target.value)}
               required
+            >
+              <option value="">Select Genre</option>
+              <option value="Action">Action</option>
+              <option value="RPG">RPG</option>
+              <option value="Adventure">Adventure</option>
+              <option value="Simulation">Simulation</option>
+              <option value="Sports">Sports</option>
+            </select>
+          </div>
+          <div>
+            <label htmlFor="userEmail" className="block text-sm font-medium text-gray-700">User Email</label>
+            <input
+              type="email"
+              id="userEmail"
+              name="userEmail"
+              value={user.email}
+              readOnly
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100 cursor-not-allowed"
+            />
+          </div>
+          <div>
+            <label htmlFor="userName" className="block text-sm font-medium text-gray-700">User Name</label>
+            <input
+              type="text"
+              id="userName"
+              name="userName"
+              value={user.displayName}
+              readOnly
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100 cursor-not-allowed"
             />
           </div>
           <button

@@ -11,7 +11,7 @@ const MyReviews = () => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/reviews?email=${user.email}`);
+        const response = await fetch(`http://localhost:5000/reviews?email=${user.email}`);
         if (!response.ok) throw new Error('Failed to fetch');
         const data = await response.json();
         setReviews(data);
@@ -33,7 +33,7 @@ const MyReviews = () => {
     if (!confirmDelete) return;
 
     try {
-      const response = await fetch(`http://localhost:5000/api/reviews/${id}`, { method: 'DELETE' });
+      const response = await fetch(`http://localhost:5000/reviews/${id}`, { method: 'DELETE' });
       if (!response.ok) throw new Error('Failed to delete');
       toast.success('Review deleted successfully');
       setReviews(reviews.filter((review) => review._id !== id));
