@@ -8,6 +8,10 @@ import AllReviews from "../Pages/AllReviews";
 import AddReview from "../Pages/AddReview";
 import MyReviews from "../Pages/MyReviews";
 import PrivateRoute from "../Private/PrivateRoute";
+import ReviewDetails from "../Components/ReviewDetails";
+import HighestRated from "../Components/HighestRated";
+import UpdateReview from "../Components/UpdateReview";
+import MyWatchlist from "../Pages/MyWatchlist";
 
 const router = createBrowserRouter([
     {
@@ -46,6 +50,26 @@ const router = createBrowserRouter([
                   <PrivateRoute>
                       <MyReviews></MyReviews>
                   </PrivateRoute>
+              
+            },
+            {
+                path: '/review/:id',
+                element: <ReviewDetails></ReviewDetails>
+              
+            },
+            {
+                path: '/highest-rated-games',
+                element: <HighestRated></HighestRated>
+              
+            },
+            {
+                path: '/review/:id',
+                element: <PrivateRoute><UpdateReview></UpdateReview></PrivateRoute>
+              
+            },
+            {
+                path: '/myWatchlist',
+                element:<MyWatchlist></MyWatchlist>
               
             },
         ]

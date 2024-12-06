@@ -5,10 +5,33 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
-    font-family: "Poppins", sans-serif;
-}
 
-nav{
+
+
+
+body {
+    font-family: "Poppins", sans-serif; /* Retro gaming font */
+  }
+  nav{
     font-family: "Montserrat", sans-serif;
 }
+  
+  
+  button {
+    background: linear-gradient(135deg, #8e44ad, #3498db); /* Gradient button */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 16px;
+    font-family: 'Press Start 2P', cursive; /* Retro gaming font */
+  }
+  
+  button:hover {
+    background: linear-gradient(135deg, #3498db, #8e44ad); /* Reverse gradient on hover */
+  }
+  
+  img {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  

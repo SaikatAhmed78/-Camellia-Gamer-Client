@@ -8,6 +8,7 @@ const AddReview = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
+  const [coverImage, setCoverImage] = useState(''); // Added coverImage state
   const [description, setDescription] = useState('');
   const [rating, setRating] = useState(0);
   const [year, setYear] = useState('');
@@ -27,6 +28,7 @@ const AddReview = () => {
 
     const review = {
       title,
+      coverImage, // Added coverImage
       description,
       rating,
       year,
@@ -43,21 +45,23 @@ const AddReview = () => {
     })
       .then((response) => {
         if (response.ok) {
-          Swal.fire({
-            icon: 'success',
-            title: 'Review added successfully!',
-            showConfirmButton: false,
-            timer: 1500
-          });
-          setTitle('');
-          setCoverImage('');
-          setDescription('');
-          setRating(0);
-          setYear('');
-          setGenre('');
-        } else {
-          throw new Error('Failed to add review.');
+          return response.json();
         }
+        throw new Error('Failed to add review.');
+      })
+      .then((data) => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Review added successfully!',
+          showConfirmButton: false,
+          timer: 1500
+        });
+        setTitle('');
+        setCoverImage(''); // Clear coverImage state
+        setDescription('');
+        setRating(0);
+        setYear('');
+        setGenre('');
       })
       .catch((error) => {
         Swal.fire({
@@ -74,7 +78,19 @@ const AddReview = () => {
       <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
         <h2 className="text-3xl font-bold text-center mb-6 text-[#6B46C1]">Add New Review</h2>
         <form onSubmit={handleAddReview} className="space-y-6">
-        
+          <div>
+            <label htmlFor="coverImage" className="block text-sm font-medium text-gray-700">Game Cover Image</label>
+            <input
+              type="text"
+              id="coverImage"
+              name="coverImage"
+              placeholder="Enter the game cover image URL"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-[#6B46C1] focus:border-[#6B46C1]"
+              value={coverImage}
+              onChange={(e) => setCoverImage(e.target.value)}
+              required
+            />
+          </div>
           <div>
             <label htmlFor="title" className="block text-sm font-medium text-gray-700">Game Title</label>
             <input

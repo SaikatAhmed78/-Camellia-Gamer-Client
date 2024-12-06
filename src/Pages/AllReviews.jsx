@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const AllReviews = () => {
   const loadedReviews = useLoaderData();
@@ -33,18 +34,18 @@ const AllReviews = () => {
   };
 
   return (
-    <div className="container mx-auto mb-10 p-5">
-      <h2 className="text-4xl font-bold text-center mb-8">All Reviews: {reviews.length}</h2>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-blue-100 to-purple-200 p-5">
+      <h2 className="text-4xl font-bold text-center mb-8 text-[#6B46C1]">All Reviews: {reviews.length}</h2>
 
-      <div className="flex justify-between mb-6">
-        <select onChange={handleSortChange} className="p-2 border rounded">
+      <div className="flex justify-between mb-6 w-full max-w-4xl">
+        <select onChange={handleSortChange} className="p-2 border rounded bg-[#6B46C1] text-white">
           <option value="">Sort By</option>
           <option value="rating-asc">Rating (Low to High)</option>
           <option value="rating-desc">Rating (High to Low)</option>
           <option value="year-asc">Year (Oldest to Newest)</option>
           <option value="year-desc">Year (Newest to Oldest)</option>
         </select>
-        <select onChange={handleFilterChange} className="p-2 border rounded">
+        <select onChange={handleFilterChange} className="p-2 border rounded bg-[#6B46C1] text-white">
           <option value="">Filter By Genre</option>
           <option value="Action">Action</option>
           <option value="Adventure">Adventure</option>
@@ -54,18 +55,20 @@ const AllReviews = () => {
         </select>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-6xl">
         {reviews.map((review) => (
-          <div key={review._id} className="bg-white shadow-md rounded-lg p-5 transition-transform transform hover:-translate-y-1">
-            <h3 className="text-2xl font-semibold mb-2">{review.title}</h3>
-            <p className="text-gray-700 mb-4">{review.description}</p>
-            <div className="flex justify-between items-center">
+          <div key={review._id} className="bg-white shadow-lg rounded-lg p-5 transition-transform transform hover:-translate-y-1 hover:shadow-2xl">
+            <img src={review.coverImage} alt={review.title} className="rounded-lg mb-4 w-full h-48 object-cover" />
+            <h3 className="text-2xl font-semibold mb-2 text-[#6B46C1]">{review.title}</h3>
+            <p className="text-gray-700 mb-4 truncate">{review.description}</p>
+            <div className="flex justify-between items-center mb-4">
               <span className="text-yellow-500 font-bold">{review.rating}/10</span>
-              <p className="text-gray-500 italic">{review.year}</p>
+              <span className="text-gray-500 italic">{review.year}</span>
             </div>
-            <div className="mt-4">
-              <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm">{review.genre}</span>
-            </div>
+            <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm">{review.genre}</span>
+            <Link to={`/review/${review._id}`} className="w-full py-2 px-4 bg-[#6B46C1] text-white font-semibold rounded-md shadow-md hover:bg-[#553C9A] transition duration-300 ease-in-out text-center block mt-4">
+              Explore Details
+            </Link>
           </div>
         ))}
       </div>
