@@ -64,7 +64,11 @@ const AuthProvider = ({ children }) => {
     const signInWithGoogle = async () => {
         try {
             const result = await signInWithPopup(auth, googleProvider);
-            setUser(result.user);
+            const user = {
+                ...result.user,
+                displayName: result.user.displayName || result.user.email.split('@')[0]
+            };
+            setUser(user);
             Swal.fire({
                 icon: 'success',
                 title: 'Google login successful!',
@@ -85,7 +89,11 @@ const AuthProvider = ({ children }) => {
     const signInWithGithub = async () => {
         try {
             const result = await signInWithPopup(auth, githubProvider);
-            setUser(result.user);
+            const user = {
+                ...result.user,
+                displayName: result.user.displayName || result.user.email.split('@')[0]
+            };
+            setUser(user);
             Swal.fire({
                 icon: 'success',
                 title: 'GitHub login successful!',
