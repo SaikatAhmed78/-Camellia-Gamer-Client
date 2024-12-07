@@ -60,6 +60,7 @@ const router = createBrowserRouter([
             {
                 path: '/highest-rated-games',
                 element: <HighestRated></HighestRated>
+                
               
             },
             {
@@ -69,7 +70,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/myWatchlist',
-                element:<MyWatchlist></MyWatchlist>
+                element:<PrivateRoute><MyWatchlist></MyWatchlist></PrivateRoute>
               
             },
         ]

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLoaderData, Link } from 'react-router-dom';
-import Swal from 'sweetalert2';
+
 
 const AllReviews = () => {
   const loadedReviews = useLoaderData();
@@ -77,3 +77,5 @@ const AllReviews = () => {
 };
 
 export default AllReviews;
+
+
