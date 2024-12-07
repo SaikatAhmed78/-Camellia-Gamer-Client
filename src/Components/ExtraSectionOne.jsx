@@ -1,35 +1,67 @@
 import React from 'react';
-import trendingGame1 from '../../src/assets/extraone/game--fortnite.jpg.webp'; 
+import trendingGame1 from '../../src/assets/extraone/game--fortnite.jpg.webp';
 import trendingGame2 from '../../src/assets/extraone/game--league-of-legends.jpg.webp';
 import trendingGame3 from '../../src/assets/extraone/game--call-of-duty-modern-warfare-ii-iii-warzone-black-ops-6.jpg';
 
 const ExtraSectionOne = () => {
   return (
-    <div className="container mx-auto mb-10">
-      <h2 className="text-3xl font-bold text-center mb-8">Top Trending Games</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div className="bg-white shadow-lg rounded-lg p-5">
-          <img src={trendingGame1} alt="Trending Game 1" className="h-48 w-full object-cover rounded-md mb-4" />
-          <h3 className="text-xl font-semibold mb-2">ROBLOX</h3>
-          <p className="text-gray-700 mb-4">ROBLOX was the #3 most played game in October 2024, based on the number of monthly active users or players. ROBLOX is a Sandbox game developed by Roblox that can be played on PlayStation 5, iOS, Android, Meta Quest, PlayStation 4, Windows, Xbox One, Mac.</p>
-          <div className="flex justify-center">
-            <a href="https://www.roblox.com/" target="_blank" rel="noopener noreferrer" className="flex-1 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 text-center">Explore Details</a>
+    <div className="container mx-auto px-4 mb-12">
+      <h2 className="text-4xl font-extrabold text-center mb-10 text-gray-800">Top Trending Games</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        {/* Card 1 */}
+        <div className="bg-gray-50 shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
+          <img src={trendingGame1} alt="Trending Game 1" className="h-56 w-full object-cover" />
+          <div className="p-6">
+            <h3 className="text-2xl font-bold mb-3 text-gray-700">ROBLOX</h3>
+            <p className="text-gray-600 mb-5">
+              ROBLOX ranked #3 in October 2024 by monthly active players. It's a sandbox game available on PlayStation, iOS, Android, Windows, Xbox, and Mac platforms.
+            </p>
+            <a
+              href="https://www.roblox.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block text-center bg-blue-600 text-white font-medium py-2 rounded-md hover:bg-blue-700"
+            >
+              Explore Details
+            </a>
           </div>
         </div>
-        <div className="bg-white shadow-lg rounded-lg p-5">
-          <img src={trendingGame2} alt="Trending Game 2" className="h-48 w-full object-cover rounded-md mb-4" />
-          <h3 className="text-xl font-semibold mb-2">League of Legends</h3>
-          <p className="text-gray-700 mb-4">League of Legends was the #9 most played game in October 2024, based on the number of monthly active users or players. League of Legends is a Battle Arena game developed by Riot Games that can be played on Windows, Mac.</p>
-          <div className="flex justify-center">
-            <a href="https://www.leagueoflegends.com/" target="_blank" rel="noopener noreferrer" className="flex-1 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 text-center">Explore Details</a>
+
+
+        <div className="bg-gray-50 shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
+          <img src={trendingGame2} alt="Trending Game 2" className="h-56 w-full object-cover" />
+          <div className="p-6">
+            <h3 className="text-2xl font-bold mb-3 text-gray-700">League of Legends</h3>
+            <p className="text-gray-600 mb-5">
+              League of Legends ranked #9 in October 2024 by monthly active players. This battle arena game is playable on Windows and Mac platforms.
+            </p>
+            <a
+              href="https://www.leagueoflegends.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block text-center bg-blue-600 text-white font-medium py-2 rounded-md hover:bg-blue-700"
+            >
+              Explore Details
+            </a>
           </div>
         </div>
-        <div className="bg-white shadow-lg rounded-lg p-5">
-          <img src={trendingGame3} alt="Trending Game 3" className="h-48 w-full object-cover rounded-md mb-4" />
-          <h3 className="text-xl font-semibold mb-2">Call of Duty: Modern Warfare</h3>
-          <p className="text-gray-700 mb-4">Call of Duty: Modern Warfare II/III/Warzone/Black Ops 6 was the #2 most played game in October 2024, based on the number of monthly active users or players. Call of Duty is a first-person shooter game developed by Infinity Ward and published by Activision.</p>
-          <div className="flex justify-center">
-            <a href="https://www.callofduty.com/" target="_blank" rel="noopener noreferrer" className="flex-1 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 text-center">Explore Details</a>
+
+
+        <div className="bg-gray-50 shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
+          <img src={trendingGame3} alt="Trending Game 3" className="h-56 w-full object-cover" />
+          <div className="p-6">
+            <h3 className="text-2xl font-bold mb-3 text-gray-700">Call of Duty</h3>
+            <p className="text-gray-600 mb-5">
+              Call of Duty ranked #2 in October 2024 by monthly active players. This first-person shooter is developed by Infinity Ward for multiple platforms.
+            </p>
+            <a
+              href="https://www.callofduty.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block text-center bg-blue-600 text-white font-medium py-2 rounded-md hover:bg-blue-700"
+            >
+              Explore Details
+            </a>
           </div>
         </div>
       </div>

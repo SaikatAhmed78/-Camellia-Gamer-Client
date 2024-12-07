@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const HighestRated = () => {
@@ -9,9 +8,9 @@ const HighestRated = () => {
   useEffect(() => {
     const fetchGames = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/highest-rated-games');
-        console.log('Fetched games:', response.data);
-        setGames(response.data);
+        const response = await fetch('http://localhost:5000/highest-rated-games');
+        const data = await response.json();
+        setGames(data);
       } catch (error) {
         console.error('Error fetching games:', error);
       }
@@ -20,11 +19,11 @@ const HighestRated = () => {
   }, []);
 
   const handleExploreDetails = (gameId) => {
-    navigate(`/games/${gameId}`);
+    navigate(`/review/${gameId}`);
   };
 
   return (
-    <div className="container mx-auto mb-10">
+    <div className="container mx-auto mb-10 mt-20">
       <h2 className="text-3xl font-bold text-center mb-8">Highest Rated Games</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {Array.isArray(games) ? (
@@ -32,7 +31,7 @@ const HighestRated = () => {
             <div key={game._id} className="bg-white shadow-lg rounded-lg p-5">
               <img src={game.coverImage} alt={game.title} className="h-48 w-full object-cover rounded-md mb-4"/>
               <h3 className="text-xl font-semibold mb-2">{game.title}</h3>
-              <p className="text-gray-700 mb-4">{game.description}</p>
+              <p className="text-gray-700 mb-4">{game.description.slice(0, 70)}...</p>
               <div className="flex justify-between items-center">
                 <span className="text-yellow-500 font-bold">{game.rating}/10</span>
                 <button

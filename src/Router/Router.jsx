@@ -38,43 +38,30 @@ const router = createBrowserRouter([
             },
             {
                 path: '/addReview',
-                element:
-                    <PrivateRoute><AddReview></AddReview></PrivateRoute>
-                    
-                
+                element: <PrivateRoute><AddReview></AddReview></PrivateRoute>
             },
             {
                 path: '/myReviews',
-                element: 
-              
-                  <PrivateRoute>
-                      <MyReviews></MyReviews>
-                  </PrivateRoute>
-              
+                element: <PrivateRoute><MyReviews></MyReviews></PrivateRoute>
             },
             {
                 path: '/review/:id',
-                element: <ReviewDetails></ReviewDetails>
-              
+                element: <PrivateRoute><ReviewDetails></ReviewDetails></PrivateRoute>
             },
             {
                 path: '/highest-rated-games',
                 element: <HighestRated></HighestRated>
-                
-              
             },
             {
-                path: '/review/:id',
+                path: '/updateReview/:id',
                 element: <PrivateRoute><UpdateReview></UpdateReview></PrivateRoute>
-              
             },
             {
                 path: '/myWatchlist',
                 element:<PrivateRoute><MyWatchlist></MyWatchlist></PrivateRoute>
-              
             },
+           
         ]
-        
     }
 ])
 

@@ -10,7 +10,7 @@ const MyWatchlist = () => {
   useEffect(() => {
     const fetchWatchlist = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/watchlist?email=${user.email}`);
+        const response = await fetch(`http://localhost:5000/watchlist/${user.email}`);
         if (!response.ok) throw new Error("Failed to fetch watchlist");
         const data = await response.json();
         setWatchlist(data);
@@ -42,9 +42,7 @@ const MyWatchlist = () => {
     }
   };
 
-  if (loading) {
-    return <div className="text-center py-10">Loading your watchlist...</div>;
-  }
+ 
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -64,7 +62,7 @@ const MyWatchlist = () => {
           <tbody>
             {watchlist.map((item) => (
               <tr key={item._id} className="border-b hover:bg-gray-50">
-                <td className="px-6 py-4">{item.gameTitle}</td>
+                <td className="px-6 py-4">{item.title}</td>
                 <td className="px-6 py-4">{item.genre || "N/A"}</td>
                 <td className="px-6 py-4">{new Date(item.addedOn).toLocaleDateString()}</td>
                 <td className="px-6 py-4 text-center">

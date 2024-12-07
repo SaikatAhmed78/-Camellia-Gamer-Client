@@ -48,9 +48,7 @@ const UpdateReview = () => {
     }
   };
 
-  if (loading) {
-    return <div className="text-center py-10">Loading review details...</div>;
-  }
+ 
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -64,7 +62,7 @@ const UpdateReview = () => {
             type="text"
             id="gameTitle"
             name="gameTitle"
-            defaultValue={review?.gameTitle}
+            defaultValue={review?.title}
             required
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500"
           />
@@ -78,7 +76,7 @@ const UpdateReview = () => {
             id="comment"
             name="comment"
             rows="4"
-            defaultValue={review?.comment}
+            defaultValue={review?.description}
             required
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500"
           ></textarea>

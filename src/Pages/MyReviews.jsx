@@ -60,9 +60,7 @@ const handleDelete = async (id) => {
   });
 };
 
-  if (loading) {
-    return <div className="text-center py-10">Loading your reviews...</div>;
-  }
+ 
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -83,8 +81,8 @@ const handleDelete = async (id) => {
             <tbody>
               {reviews.map((review) => (
                 <tr key={review._id} className="hover:bg-gray-50">
-                  <td className="border border-gray-300 px-4 py-2">{review.gameTitle}</td>
-                  <td className="border border-gray-300 px-4 py-2">{review.comment}</td>
+                  <td className="border border-gray-300 px-4 py-2">{review.title}</td>
+                  <td className="border border-gray-300 px-4 py-2">{review.description}</td>
                   <td className="border border-gray-300 px-4 py-2">{review.rating}/5</td>
                   <td className="border border-gray-300 px-4 py-2 text-center">
                     <div className="flex justify-center space-x-2">
