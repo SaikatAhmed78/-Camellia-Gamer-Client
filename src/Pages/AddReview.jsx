@@ -12,11 +12,12 @@ const AddReview = () => {
   const [coverImage, setCoverImage] = useState('');
   const [description, setDescription] = useState('');
   const [rating, setRating] = useState(0);
-  const [year, setYear] = useState('');
+  const [yearN, setYear] = useState('');
   const [genre, setGenre] = useState('');
   const [hover, setHover] = useState(null);
 
   const handleAddReview = (e) => {
+    console.log(rating)
     e.preventDefault();
     if (!user) {
       Swal.fire({
@@ -26,12 +27,15 @@ const AddReview = () => {
       navigate('/login');
       return;
     }
+    const ratingN = parseInt(rating)
+
+    const year = parseInt(yearN)
 
     const review = {
       title,
       coverImage,
       description,
-      rating,
+      ratingN,
       year,
       genre,
       userEmail: user.email,
@@ -89,6 +93,7 @@ const AddReview = () => {
           </p>
         </div>
         <form onSubmit={handleAddReview} className="space-y-6">
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-medium text-white">User Email</label>
@@ -148,9 +153,9 @@ const AddReview = () => {
               <label className="block text-sm font-medium text-white">Year</label>
               <input
                 type="number"
-                placeholder="Release year"
+                placeholder="Release yearN"
                 className="mt-2 w-full px-4 py-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring focus:ring-purple-500"
-                value={year}
+                value={yearN}
                 onChange={(e) => setYear(e.target.value)}
                 required
               />
@@ -184,6 +189,7 @@ const AddReview = () => {
                         value={ratingValue}
                         className="hidden"
                         onClick={() => setRating(ratingValue)}
+
                       />
                       <FaStar
                         className={`text-2xl ${

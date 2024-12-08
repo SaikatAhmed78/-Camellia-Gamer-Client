@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import { onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
+import { onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, updateProfile, GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
 import { auth } from "../Firebase/firebase.init";
 import Swal from 'sweetalert2';
 
@@ -111,6 +111,30 @@ const AuthProvider = ({ children }) => {
         }
     };
 
+    const updateUserProfile = async (profileUpdates) => {
+        await updateProfile(auth.currentUser, profileUpdates);
+        if (user) {
+            try {
+                
+                const updatedUser = { ...user, ...profileUpdates };
+                setUser(updatedUser);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Profile updated successfully!',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Profile update failed!',
+                    text: 'Please try again.',
+                });
+                throw error;
+            }
+        }
+    };
+
     const logout = async () => {
         try {
             await signOut(auth);
@@ -137,6 +161,7 @@ const AuthProvider = ({ children }) => {
         signInUser,
         signInWithGoogle,
         signInWithGithub,
+        updateUserProfile,
         logout
     };
 

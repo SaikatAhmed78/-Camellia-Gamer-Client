@@ -12,9 +12,9 @@ const AllReviews = () => {
     const { value } = e.target;
     setSortOption(value);
     if (value === 'rating-asc') {
-      setReviews([...reviews].sort((a, b) => a.rating - b.rating));
+      setReviews([...reviews].sort((a, b) => a.ratingN - b.ratingN));
     } else if (value === 'rating-desc') {
-      setReviews([...reviews].sort((a, b) => b.rating - a.rating));
+      setReviews([...reviews].sort((a, b) => b.ratingN - a.ratingN));
     } else if (value === 'year-asc') {
       setReviews([...reviews].sort((a, b) => a.year - b.year));
     } else if (value === 'year-desc') {
@@ -62,7 +62,7 @@ const AllReviews = () => {
             <h3 className="text-2xl font-semibold mb-2 text-[#6B46C1]">{review.title}</h3>
             <p className="text-gray-700 mb-4 truncate">{review.description}</p>
             <div className="flex justify-between items-center mb-4">
-              <span className="text-yellow-500 font-bold">{review.rating}/10</span>
+              <span className="text-yellow-500 font-bold">{review.ratingN}/10</span>
               <span className="text-gray-500 italic">{review.year}</span>
             </div>
             <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm">{review.genre}</span>

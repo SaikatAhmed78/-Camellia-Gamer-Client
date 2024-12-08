@@ -6,9 +6,9 @@ import trendingGame3 from '../../src/assets/extraone/game--call-of-duty-modern-w
 const ExtraSectionOne = () => {
   return (
     <div className="container mx-auto px-4 mb-12">
-      <h2 className="text-4xl font-extrabold text-center mb-10 text-gray-800">Top Trending Games</h2>
+      <h2 className="text-4xl font-extrabold text-center mb-10 text-blue-500">Top Trending Games</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-        {/* Card 1 */}
+    
         <div className="bg-gray-50 shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
           <img src={trendingGame1} alt="Trending Game 1" className="h-56 w-full object-cover" />
           <div className="p-6">

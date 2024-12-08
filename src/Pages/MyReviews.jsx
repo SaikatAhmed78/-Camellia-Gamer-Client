@@ -97,7 +97,7 @@ const MyReviews = () => {
                     {review.description}
                   </td>
                   <td className="border border-gray-700 px-4 py-2">
-                    {review.rating}/5
+                    {review.ratingN}/10
                   </td>
                   <td className="border border-gray-700 px-4 py-2 text-center">
                     <div className="flex justify-center space-x-2">

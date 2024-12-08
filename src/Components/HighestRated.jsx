@@ -13,10 +13,10 @@ const HighestRated = () => {
           throw new Error('Failed to fetch games.');
         }
         const data = await response.json();
-        setGames(data || []); // Ensure `games` is always an array
+        setGames(data || []); 
       } catch (error) {
         console.error('Error fetching games:', error);
-        setGames([]); // Default to an empty array on error
+        setGames([]); 
       }
     };
     fetchGames();
@@ -30,7 +30,7 @@ const HighestRated = () => {
     <div className="container mx-auto mb-10 mt-20">
       <h2 className="text-3xl font-bold text-center mb-8">Highest Rated Games</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {games.length > 0 ? ( // Check if `games` has elements
+        {games.length > 0 ? ( 
           games.slice(0, 6).map((game) => (
             <div key={game._id} className="bg-white shadow-lg rounded-lg p-5">
               <img
@@ -43,7 +43,7 @@ const HighestRated = () => {
                 {game.description?.slice(0, 70) || 'No description available'}...
               </p>
               <div className="flex justify-between items-center">
-                <span className="text-yellow-500 font-bold">{game.rating}/10</span>
+                <span className="text-yellow-500 font-bold">{game.ratingN}/10</span>
                 <button
                   className="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600"
                   onClick={() => handleExploreDetails(game._id)}

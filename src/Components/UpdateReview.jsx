@@ -14,7 +14,9 @@ const UpdateReview = () => {
     const fetchReview = async () => {
       try {
         const response = await fetch(`http://localhost:5000/review/${id}`);
+        console.log(response)
         if (!response.ok) throw new Error('Failed to fetch review');
+        
         const data = await response.json();
         setReview(data);
       } catch (error) {
@@ -97,10 +99,10 @@ const UpdateReview = () => {
               <input
                 type="number"
                 id="rating"
-                name="rating"
+                name="ratingN"
                 min="1"
-                max="5"
-                defaultValue={review?.rating || ''}
+                max="10"
+                defaultValue={review?.ratingN || ''}
                 required
                 className="mt-2 w-full px-4 py-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring focus:ring-purple-500"
               />

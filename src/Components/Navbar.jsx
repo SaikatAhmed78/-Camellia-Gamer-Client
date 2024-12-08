@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
-import { useTheme } from "../Provider/ThemeProvider"; // Theme toggle hook
+import { useTheme } from "../Provider/ThemeProvider";
 import logo from "../../src/assets/logo/deer-gaming-logo-vector-design_343694-1363.avif";
 import {
   FaHome,
@@ -19,7 +19,7 @@ import { toast } from "react-toastify";
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
-  const { theme, toggleTheme } = useTheme(); // Access theme and toggle function
+  const { theme, toggleTheme } = useTheme(); 
 
   const handleLogout = () => {
     logout();
@@ -29,7 +29,7 @@ const Navbar = () => {
   return (
     <nav className="bg-gradient-to-r from-black via-purple-800 to-black shadow-xl sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        {/* Logo Section */}
+
         <div className="flex items-center space-x-3">
           <Link to="/" className="flex items-center">
             <img
@@ -43,7 +43,7 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* Links for Large Screens */}
+
         <div className="hidden lg:flex space-x-8 text-lg">
           <Link
             to="/"
@@ -121,9 +121,8 @@ const Navbar = () => {
           )}
         </div>
 
-        {/* Theme Toggle and Menu for Small Screens */}
         <div className="flex items-center space-x-4">
-          {/* Theme Toggle Button */}
+    
           <button
             onClick={toggleTheme}
             className="p-2 rounded-full border-2 border-gray-500 bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-300 flex items-center justify-center"
@@ -131,7 +130,7 @@ const Navbar = () => {
             {theme === "light" ? <FaMoon size={20} /> : <FaSun size={20} />}
           </button>
 
-          {/* Hamburger Menu */}
+       
           <div className="lg:hidden">
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost btn-circle">

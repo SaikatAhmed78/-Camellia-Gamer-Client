@@ -5,7 +5,7 @@ import signUpImg from '../../src/assets/form/sign-up-concept-illustration_114360
 import { toast } from 'react-toastify';
 
 const Register = () => {
-  const { registerUser } = useContext(AuthContext);
+  const { registerUser, updateUserProfile } = useContext(AuthContext);
   const navigate = useNavigate();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -27,10 +27,18 @@ const Register = () => {
     }
 
     registerUser(email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        return updateUserProfile({ displayName: name, photoURL });
+      })
       .then(() => {
+        toast.success('Registration successful! Profile updated.');
         navigate('/');
       })
-      .catch((error) => console.error('Error during registration:', error));
+      .catch((error) => {
+        toast.error('Error during registration. Please try again.');
+        console.error('Error during registration:', error);
+      });
   };
 
   return (

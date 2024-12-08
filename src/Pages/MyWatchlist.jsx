@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
-import { FaTrashAlt } from "react-icons/fa";
 import { toast } from "react-toastify";
 
 const MyWatchlist = () => {
@@ -46,7 +45,6 @@ const MyWatchlist = () => {
               <th className="px-6 py-4 text-left">Game Title</th>
               <th className="px-6 py-4 text-left">Genre</th>
               <th className="px-6 py-4 text-left">Added On</th>
-              <th className="px-6 py-4 text-center">Options</th>
             </tr>
           </thead>
           <tbody>
@@ -64,14 +62,7 @@ const MyWatchlist = () => {
                         month: "long",
                         day: "numeric",
                       })
-                    : "Date Not Available"}
-                </td>
-                <td className="px-6 py-4 text-center">
-                  <button
-                    className="flex items-center justify-center gap-2 bg-indigo-500 text-white px-4 py-2 rounded hover:bg-indigo-600"
-                  >
-                    <FaTrashAlt /> Manage
-                  </button>
+                    : "Added recently"}
                 </td>
               </tr>
             ))}
