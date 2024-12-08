@@ -3,12 +3,13 @@ import { AuthContext } from '../Provider/AuthProvider';
 import Swal from 'sweetalert2';
 import { FaStar } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import bgAddImage from '../../src/assets/banner/futuristic-dj-using-virtual-reality-glasses-headline-party-play-music_23-2151418276.avif';
 
 const AddReview = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
-  const [coverImage, setCoverImage] = useState(''); // Added coverImage state
+  const [coverImage, setCoverImage] = useState('');
   const [description, setDescription] = useState('');
   const [rating, setRating] = useState(0);
   const [year, setYear] = useState('');
@@ -28,20 +29,20 @@ const AddReview = () => {
 
     const review = {
       title,
-      coverImage, // Added coverImage
+      coverImage,
       description,
       rating,
       year,
       genre,
       userEmail: user.email,
       userName: user.displayName,
-      userPhoto: user.photoURL
+      userPhoto: user.photoURL,
     };
 
     fetch('http://localhost:5000/review', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(review)
+      body: JSON.stringify(review),
     })
       .then((response) => {
         if (response.ok) {
@@ -49,15 +50,15 @@ const AddReview = () => {
         }
         throw new Error('Failed to add review.');
       })
-      .then((data) => {
+      .then(() => {
         Swal.fire({
           icon: 'success',
           title: 'Review added successfully!',
           showConfirmButton: false,
-          timer: 1500
+          timer: 1500,
         });
         setTitle('');
-        setCoverImage(''); // Clear coverImage state
+        setCoverImage('');
         setDescription('');
         setRating(0);
         setYear('');
@@ -74,130 +75,136 @@ const AddReview = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-100 to-purple-200 p-4">
-      <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
-        <h2 className="text-3xl font-bold text-center mb-6 text-[#6B46C1]">Add New Review</h2>
+    <div
+      className="min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat"
+      style={{
+        backgroundImage: `url(${bgAddImage})`,
+      }}
+    >
+      <div className="bg-black bg-opacity-75 shadow-2xl rounded-lg p-8 max-w-3xl w-full">
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold text-purple-300">Share Your Game Review</h1>
+          <p className="text-gray-300 mt-2">
+            Help others by sharing your thoughts about your favorite games!
+          </p>
+        </div>
         <form onSubmit={handleAddReview} className="space-y-6">
-          <div>
-            <label htmlFor="coverImage" className="block text-sm font-medium text-gray-700">Game Cover Image</label>
-            <input
-              type="text"
-              id="coverImage"
-              name="coverImage"
-              placeholder="Enter the game cover image URL"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-[#6B46C1] focus:border-[#6B46C1]"
-              value={coverImage}
-              onChange={(e) => setCoverImage(e.target.value)}
-              required
-            />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-white">User Email</label>
+              <input
+                type="email"
+                value={user?.email || ''}
+                readOnly
+                className="mt-2 w-full px-4 py-2 rounded-md bg-gray-700 text-gray-400 cursor-not-allowed"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-white">User Name</label>
+              <input
+                type="text"
+                value={user?.displayName || ''}
+                readOnly
+                className="mt-2 w-full px-4 py-2 rounded-md bg-gray-700 text-gray-400 cursor-not-allowed"
+              />
+            </div>
           </div>
-          <div>
-            <label htmlFor="title" className="block text-sm font-medium text-gray-700">Game Title</label>
-            <input
-              type="text"
-              id="title"
-              name="title"
-              placeholder="Enter the game title"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-[#6B46C1] focus:border-[#6B46C1]"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              required
-            />
-          </div>
-          <div>
-            <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description</label>
-            <textarea
-              id="description"
-              name="description"
-              placeholder="Enter the review description"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-[#6B46C1] focus:border-[#6B46C1]"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              required
-            ></textarea>
-          </div>
-          <div>
-            <label htmlFor="rating" className="block text-sm font-medium text-gray-700">Rating</label>
-            <div className="flex items-center">
-              {[...Array(10)].map((star, i) => {
-                const ratingValue = i + 1;
-                return (
-                  <label key={i}>
-                    <input
-                      type="radio"
-                      name="rating"
-                      value={ratingValue}
-                      className="hidden"
-                      onClick={() => setRating(ratingValue)}
-                    />
-                    <FaStar
-                      className={`cursor-pointer text-2xl ${ratingValue <= (hover || rating) ? 'text-[#FFD700]' : 'text-gray-300'}`}
-                      onMouseEnter={() => setHover(ratingValue)}
-                      onMouseLeave={() => setHover(null)}
-                    />
-                  </label>
-                );
-              })}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-white">Game Cover Image</label>
+              <input
+                type="text"
+                placeholder="Enter cover image URL"
+                className="mt-2 w-full px-4 py-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring focus:ring-purple-500"
+                value={coverImage}
+                onChange={(e) => setCoverImage(e.target.value)}
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-white">Game Title</label>
+              <input
+                type="text"
+                placeholder="Enter game title"
+                className="mt-2 w-full px-4 py-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring focus:ring-purple-500"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                required
+              />
             </div>
           </div>
           <div>
-            <label htmlFor="year" className="block text-sm font-medium text-gray-700">Year</label>
-            <input
-              type="number"
-              id="year"
-              name="year"
-              placeholder="Enter the year of release"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-[#6B46C1] focus:border-[#6B46C1]"
-              value={year}
-              onChange={(e) => setYear(e.target.value)}
+            <label className="block text-sm font-medium text-white">Description</label>
+            <textarea
+              placeholder="Write your review"
+              className="mt-2 w-full px-4 py-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring focus:ring-purple-500"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
               required
             />
           </div>
-          <div>
-            <label htmlFor="genre" className="block text-sm font-medium text-gray-700">Genre</label>
-            <select
-              id="genre"
-              name="genre"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-[#6B46C1] focus:border-[#6B46C1]"
-              value={genre}
-              onChange={(e) => setGenre(e.target.value)}
-              required
-            >
-              <option value="">Select Genre</option>
-              <option value="Action">Action</option>
-              <option value="RPG">RPG</option>
-              <option value="Adventure">Adventure</option>
-              <option value="Simulation">Simulation</option>
-              <option value="Sports">Sports</option>
-            </select>
-          </div>
-          <div>
-            <label htmlFor="userEmail" className="block text-sm font-medium text-gray-700">User Email</label>
-            <input
-              type="email"
-              id="userEmail"
-              name="userEmail"
-              value={user.email}
-              readOnly
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100 cursor-not-allowed"
-            />
-          </div>
-          <div>
-            <label htmlFor="userName" className="block text-sm font-medium text-gray-700">User Name</label>
-            <input
-              type="text"
-              id="userName"
-              name="userName"
-              value={user.displayName}
-              readOnly
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100 cursor-not-allowed"
-            />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-white">Year</label>
+              <input
+                type="number"
+                placeholder="Release year"
+                className="mt-2 w-full px-4 py-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring focus:ring-purple-500"
+                value={year}
+                onChange={(e) => setYear(e.target.value)}
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-white">Genre</label>
+              <select
+                className="mt-2 w-full px-4 py-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring focus:ring-purple-500"
+                value={genre}
+                onChange={(e) => setGenre(e.target.value)}
+                required
+              >
+                <option value="">Select Genre</option>
+                <option value="Action">Action</option>
+                <option value="RPG">RPG</option>
+                <option value="Adventure">Adventure</option>
+                <option value="Simulation">Simulation</option>
+                <option value="Sports">Sports</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-white">Rating</label>
+              <div className="flex items-center space-x-1 mt-2">
+                {[...Array(10)].map((star, i) => {
+                  const ratingValue = i + 1;
+                  return (
+                    <label key={i}>
+                      <input
+                        type="radio"
+                        name="rating"
+                        value={ratingValue}
+                        className="hidden"
+                        onClick={() => setRating(ratingValue)}
+                      />
+                      <FaStar
+                        className={`text-2xl ${
+                          ratingValue <= (hover || rating)
+                            ? 'text-yellow-400'
+                            : 'text-gray-500'
+                        } cursor-pointer`}
+                        onMouseEnter={() => setHover(ratingValue)}
+                        onMouseLeave={() => setHover(null)}
+                      />
+                    </label>
+                  );
+                })}
+              </div>
+            </div>
           </div>
           <button
             type="submit"
-            className="w-full py-2 px-4 bg-[#6B46C1] text-white font-semibold rounded-md shadow-md hover:bg-[#553C9A] transition duration-300 ease-in-out"
+            className="w-full py-3 px-4 bg-purple-500 text-white font-semibold rounded-md shadow-lg hover:bg-purple-600 transition duration-300"
           >
-            Add Review
+            Submit Review
           </button>
         </form>
       </div>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import bgImage from '../../src/assets/banner/neon-frame-with-stars-yellow-poster-casino-brick-wall-background_851328-97.avif';
 
 const UpdateReview = () => {
   const { id } = useParams();
@@ -12,7 +13,7 @@ const UpdateReview = () => {
   useEffect(() => {
     const fetchReview = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/reviews/${id}`);
+        const response = await fetch(`http://localhost:5000/review/${id}`);
         if (!response.ok) throw new Error('Failed to fetch review');
         const data = await response.json();
         setReview(data);
@@ -33,8 +34,8 @@ const UpdateReview = () => {
     const updatedReview = Object.fromEntries(formData);
 
     try {
-      const response = await fetch(`http://localhost:5000/reviews/${id}`, {
-        method: 'PUT',
+      const response = await fetch(`http://localhost:5000/review/${id}`, {
+        method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updatedReview),
       });
@@ -48,105 +49,114 @@ const UpdateReview = () => {
     }
   };
 
- 
-
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold text-center mb-6">Update Review</h1>
-      <form onSubmit={handleSubmit} className="max-w-lg mx-auto bg-white shadow-md rounded-lg p-6">
-        <div className="mb-4">
-          <label htmlFor="gameTitle" className="block text-sm font-medium text-gray-700">
-            Game Title
-          </label>
-          <input
-            type="text"
-            id="gameTitle"
-            name="gameTitle"
-            defaultValue={review?.title}
-            required
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500"
-          />
-        </div>
+    <div
+      className="min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat"
+      style={{
+        backgroundImage: `url(${bgImage})`,
+      }}
+    >
+      <div className="bg-black bg-opacity-75 shadow-2xl rounded-lg p-8 max-w-3xl w-full">
+        <h1 className="text-3xl font-bold text-center text-purple-300 mb-6">Update Your Review</h1>
+        {loading ? (
+          <p className="text-white text-center">Loading...</p>
+        ) : (
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="mb-4">
+              <label htmlFor="title" className="block text-sm font-medium text-white">
+                Game Title
+              </label>
+              <input
+                type="text"
+                id="title"
+                name="title"
+                defaultValue={review?.title || ''}
+                required
+                className="mt-2 w-full px-4 py-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring focus:ring-purple-500"
+              />
+            </div>
 
-        <div className="mb-4">
-          <label htmlFor="comment" className="block text-sm font-medium text-gray-700">
-            Comment
-          </label>
-          <textarea
-            id="comment"
-            name="comment"
-            rows="4"
-            defaultValue={review?.description}
-            required
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500"
-          ></textarea>
-        </div>
+            <div className="mb-4">
+              <label htmlFor="description" className="block text-sm font-medium text-white">
+                Comment
+              </label>
+              <textarea
+                id="description"
+                name="description"
+                rows="4"
+                defaultValue={review?.description || ''}
+                required
+                className="mt-2 w-full px-4 py-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring focus:ring-purple-500"
+              ></textarea>
+            </div>
 
-        <div className="mb-4">
-          <label htmlFor="rating" className="block text-sm font-medium text-gray-700">
-            Rating
-          </label>
-          <input
-            type="number"
-            id="rating"
-            name="rating"
-            min="1"
-            max="5"
-            defaultValue={review?.rating}
-            required
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500"
-          />
-        </div>
+            <div className="mb-4">
+              <label htmlFor="rating" className="block text-sm font-medium text-white">
+                Rating
+              </label>
+              <input
+                type="number"
+                id="rating"
+                name="rating"
+                min="1"
+                max="5"
+                defaultValue={review?.rating || ''}
+                required
+                className="mt-2 w-full px-4 py-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring focus:ring-purple-500"
+              />
+            </div>
 
-        <div className="mb-4">
-          <label htmlFor="genres" className="block text-sm font-medium text-gray-700">
-            Genres
-          </label>
-          <input
-            type="text"
-            id="genres"
-            name="genres"
-            defaultValue={review?.genres}
-            required
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500"
-          />
-        </div>
+            <div className="mb-4">
+              <label htmlFor="genre" className="block text-sm font-medium text-white">
+                Genre
+              </label>
+              <input
+                type="text"
+                id="genre"
+                name="genre"
+                defaultValue={review?.genre || ''}
+                required
+                className="mt-2 w-full px-4 py-2 rounded-md bg-gray-700 text-white focus:outline-none focus:ring focus:ring-purple-500"
+              />
+            </div>
 
-        <div className="mb-4">
-          <label htmlFor="userEmail" className="block text-sm font-medium text-gray-700">
-            User Email
-          </label>
-          <input
-            type="email"
-            id="userEmail"
-            name="userEmail"
-            value={review?.userEmail}
-            readOnly
-            className="mt-1 block w-full rounded-md border-gray-300 bg-gray-100 shadow-sm"
-          />
-        </div>
+            <div className="mb-4">
+              <label htmlFor="userEmail" className="block text-sm font-medium text-white">
+                User Email
+              </label>
+              <input
+                type="email"
+                id="userEmail"
+                name="userEmail"
+                value={review?.userEmail || ''}
+                readOnly
+                className="mt-2 w-full px-4 py-2 rounded-md bg-gray-600 text-white"
+              />
+            </div>
 
-        <div className="mb-4">
-          <label htmlFor="userName" className="block text-sm font-medium text-gray-700">
-            User Name
-          </label>
-          <input
-            type="text"
-            id="userName"
-            name="userName"
-            value={review?.userName}
-            readOnly
-            className="mt-1 block w-full rounded-md border-gray-300 bg-gray-100 shadow-sm"
-          />
-        </div>
+            <div className="mb-4">
+              <label htmlFor="userName" className="block text-sm font-medium text-white">
+                User Name
+              </label>
+              <input
+                type="text"
+                id="userName"
+                name="userName"
+                value={review?.userName || ''}
+                readOnly
+                className="mt-2 w-full px-4 py-2 rounded-md bg-gray-600 text-white"
+              />
+            </div>
 
-        <button
-          type="submit"
-          className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg transition duration-300"
-        >
-          Update Review
-        </button>
-      </form>
+            <button
+              type="submit"
+              className="w-full py-3 px-4 bg-purple-500 text-white font-semibold rounded-md shadow-lg hover:bg-purple-600 transition duration-300"
+            >
+              Update Review
+            </button>
+          </form>
+        )}
+      </div>
     </div>
   );
 };

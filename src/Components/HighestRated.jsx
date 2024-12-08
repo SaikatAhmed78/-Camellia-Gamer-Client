@@ -9,10 +9,14 @@ const HighestRated = () => {
     const fetchGames = async () => {
       try {
         const response = await fetch('http://localhost:5000/highest-rated-games');
+        if (!response.ok) {
+          throw new Error('Failed to fetch games.');
+        }
         const data = await response.json();
-        setGames(data);
+        setGames(data || []); // Ensure `games` is always an array
       } catch (error) {
         console.error('Error fetching games:', error);
+        setGames([]); // Default to an empty array on error
       }
     };
     fetchGames();
@@ -26,12 +30,18 @@ const HighestRated = () => {
     <div className="container mx-auto mb-10 mt-20">
       <h2 className="text-3xl font-bold text-center mb-8">Highest Rated Games</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {Array.isArray(games) ? (
+        {games.length > 0 ? ( // Check if `games` has elements
           games.slice(0, 6).map((game) => (
             <div key={game._id} className="bg-white shadow-lg rounded-lg p-5">
-              <img src={game.coverImage} alt={game.title} className="h-48 w-full object-cover rounded-md mb-4"/>
+              <img
+                src={game.coverImage}
+                alt={game.title}
+                className="h-48 w-full object-cover rounded-md mb-4"
+              />
               <h3 className="text-xl font-semibold mb-2">{game.title}</h3>
-              <p className="text-gray-700 mb-4">{game.description.slice(0, 70)}...</p>
+              <p className="text-gray-700 mb-4">
+                {game.description?.slice(0, 70) || 'No description available'}...
+              </p>
               <div className="flex justify-between items-center">
                 <span className="text-yellow-500 font-bold">{game.rating}/10</span>
                 <button
