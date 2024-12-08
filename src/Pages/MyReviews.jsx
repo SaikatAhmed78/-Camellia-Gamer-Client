@@ -4,6 +4,7 @@ import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { Fade } from "react-awesome-reveal";
 
 const MyReviews = () => {
   const { user } = useContext(AuthContext);
@@ -49,7 +50,6 @@ const MyReviews = () => {
             method: "DELETE",
           });
           if (!response.ok) throw new Error("Failed to delete review");
-
           setReviews(reviews.filter((review) => review._id !== id));
           Swal.fire("Deleted!", "Your review has been deleted.", "success");
         } catch (error) {
@@ -69,7 +69,15 @@ const MyReviews = () => {
       <h1 className="text-2xl font-bold text-center mb-6 text-white">
         My Reviews
       </h1>
-      {reviews.length === 0 ? (
+
+      {loading ? (
+        <Fade>
+          <div className="flex flex-col items-center justify-center min-h-[60vh]">
+            <div className="spinner border-t-4 border-blue-400 w-16 h-16 rounded-full animate-spin"></div>
+            <p className="text-gray-400 mt-4">Loading your reviews...</p>
+          </div>
+        </Fade>
+      ) : reviews.length === 0 ? (
         <div className="text-center text-gray-400">
           You have not written any reviews yet.
         </div>
@@ -103,9 +111,7 @@ const MyReviews = () => {
                     <div className="flex justify-center space-x-2">
                       <button
                         className="text-blue-400 hover:text-blue-500"
-                        onClick={() =>
-                          navigate(`/updateReview/${review._id}`)
-                        }
+                        onClick={() => navigate(`/updateReview/${review._id}`)}
                       >
                         <FaEdit />
                       </button>
