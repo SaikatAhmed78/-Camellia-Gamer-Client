@@ -5,7 +5,7 @@ const ExtraSectionTwo = () => {
   const backgroundImage = `${bgImage}`;
   return (
     <div
-      className="container mx-auto px-6 py-12 rounded-lg shadow-xl"
+      className="container mx-auto px-6 py-12 rounded-lg shadow-xl mt-36"
       style={{
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "cover",
@@ -31,7 +31,9 @@ const ExtraSectionTwo = () => {
               <div className="flex justify-center">
                 <a
                   href="#"
-                  className="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 text-sm transition duration-300"
+                  className="
+                  bg-purple-500 text-white px-4 py-2 rounded-full hover:bg-purple-600
+                  text-sm transition duration-300"
                 >
                   Learn More
                 </a>
@@ -52,7 +54,8 @@ const ExtraSectionTwo = () => {
               <div className="flex justify-center">
                 <a
                   href="#"
-                  className="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 text-sm transition duration-300"
+                  className="bg-purple-500 text-white px-4 py-2 rounded-full hover:bg-purple-600
+                  text-sm transition duration-300"
                 >
                   Learn More
                 </a>
@@ -73,7 +76,8 @@ const ExtraSectionTwo = () => {
               <div className="flex justify-center">
                 <a
                   href="#"
-                  className="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 text-sm transition duration-300"
+                  className="bg-purple-500 text-white px-4 py-2 rounded-full hover:bg-purple-600
+                  text-sm transition duration-300"
                 >
                   Learn More
                 </a>

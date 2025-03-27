@@ -34,8 +34,8 @@ const AllReviews = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-blue-100 to-purple-200 p-5">
-      <h2 className="text-4xl font-bold text-center mb-8 text-[#6B46C1]">All Reviews: {reviews.length}</h2>
+    <div className="min-h-screen flex flex-col items-center justify-center p-5">
+      <h2 className="text-4xl font-bold text-center mb-8">All Reviews: {reviews.length}</h2>
 
       <div className="flex justify-between mb-6 w-full max-w-4xl">
         <select onChange={handleSortChange} className="p-2 border rounded bg-[#6B46C1] text-white">
@@ -63,7 +63,7 @@ const AllReviews = () => {
             <p className="text-gray-700 mb-4 truncate">{review.description}</p>
             <div className="flex justify-between items-center mb-4">
               <span className="text-yellow-500 font-bold">{review.ratingN}/10</span>
-              <span className="text-gray-500 italic">{review.year}</span>
+              <span className="text-gray-500 italic">{review.yearN}</span>
             </div>
             <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm">{review.genre}</span>
             <Link to={`/review/${review._id}`} className="w-full py-2 px-4 bg-[#6B46C1] text-white font-semibold rounded-md shadow-md hover:bg-[#553C9A] transition duration-300 ease-in-out text-center block mt-4">

@@ -28,7 +28,6 @@ const AddReview = () => {
       return;
     }
     const ratingN = parseInt(rating)
-
     const year = parseInt(yearN)
 
     const review = {
@@ -43,7 +42,7 @@ const AddReview = () => {
       userPhoto: user.photoURL,
     };
 
-    fetch('http://localhost:5000/review', {
+    fetch('https://chill-gamer-omega.vercel.app/review', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(review),
@@ -80,7 +79,7 @@ const AddReview = () => {
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat"
+      className="min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat rounded-lg"
       style={{
         backgroundImage: `url(${bgAddImage})`,
       }}

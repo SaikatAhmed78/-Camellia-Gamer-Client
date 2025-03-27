@@ -8,7 +8,7 @@ const HighestRated = () => {
   useEffect(() => {
     const fetchGames = async () => {
       try {
-        const response = await fetch('http://localhost:5000/highest-rated-games');
+        const response = await fetch('https://chill-gamer-omega.vercel.app/highest-rated-games');
         if (!response.ok) {
           throw new Error('Failed to fetch games.');
         }
@@ -28,7 +28,11 @@ const HighestRated = () => {
 
   return (
     <div className="container mx-auto mb-10 mt-20">
-      <h2 className="text-3xl font-bold text-center mb-8">Highest Rated Games</h2>
+      <h2 className="text-4xl font-bold text-center mb-2">Highest Rated Games</h2>
+      <p className="text-center text-gray-500 text-lg">
+        Discover the most loved games as rated by players across the globe. Only the best make it to the top!
+      </p>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {games.length > 0 ? ( 
           games.slice(0, 6).map((game) => (

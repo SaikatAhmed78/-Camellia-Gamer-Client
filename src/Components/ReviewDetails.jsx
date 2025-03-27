@@ -11,9 +11,10 @@ const ReviewDetails = () => {
   useEffect(() => {
     const fetchReview = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/review/${id}`);
+        const response = await fetch(`https://chill-gamer-omega.vercel.app/review/${id}`);
         if (!response.ok) throw new Error('Failed to fetch review');
         const data = await response.json();
+        console.log(data)
         setReview(data);
       } catch (error) {
         Swal.fire({
@@ -50,7 +51,7 @@ const ReviewDetails = () => {
     };
 
     try {
-      const response = await fetch('http://localhost:5000/watchlist', {
+      const response = await fetch('https://chill-gamer-omega.vercel.app/watchlist', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(watchlistItem)
@@ -81,7 +82,7 @@ const ReviewDetails = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-blue-100 to-purple-200 p-4">
+    <div className="min-h-screen p-4">
       <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
         
  
@@ -94,7 +95,7 @@ const ReviewDetails = () => {
           <h2 className="text-4xl font-bold text-[#6B46C1] text-center">{review.title}</h2>
           <p className="text-gray-700">{review.description}</p>
           <div className="flex justify-between items-center">
-            <span className="text-yellow-500 font-bold">{review.rating}/10</span>
+            <span className="text-yellow-500 font-bold">{review.ratingN}/10</span>
             <span className="text-gray-500 italic">{review.genre}</span>
           </div>
           <div className="flex justify-between items-center">

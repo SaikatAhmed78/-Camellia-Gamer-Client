@@ -6,8 +6,8 @@ import trendingGame3 from "../../src/assets/extraone/game--call-of-duty-modern-w
 
 const ExtraSectionOne = () => {
   return (
-    <div className="container mx-auto px-4 mb-12">
-      <h2 className="text-4xl font-extrabold text-center mb-10 text-blue-500">
+    <div className="container mx-auto px-4 mb-12 mt-36">
+      <h2 className="text-4xl font-extrabold text-center mb-10">
         Top Trending Games
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -88,7 +88,9 @@ const ExtraSectionOne = () => {
                 href="https://www.callofduty.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block text-center bg-blue-600 text-white font-medium py-2 rounded-md hover:bg-blue-700"
+                className="
+                
+                block text-center bg-blue-600 text-white font-medium py-2 rounded-md hover:bg-blue-700"
               >
                 Explore Details
               </a>

@@ -13,7 +13,7 @@ const UpdateReview = () => {
   useEffect(() => {
     const fetchReview = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/review/${id}`);
+        const response = await fetch(`https://chill-gamer-omega.vercel.app/review/${id}`);
         console.log(response)
         if (!response.ok) throw new Error('Failed to fetch review');
         
@@ -30,26 +30,35 @@ const UpdateReview = () => {
     fetchReview();
   }, [id]);
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const updatedReview = Object.fromEntries(formData);
+  
+    fetch(`https://chill-gamer-omega.vercel.app/review/${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(updatedReview),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to update review');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if(data.modifiedCount > 0){
 
-    try {
-      const response = await fetch(`http://localhost:5000/review/${id}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updatedReview),
+          toast.success('Review updated successfully');
+          navigate('/myReviews');
+        }
+      })
+      .catch((error) => {
+        toast.error('Failed to update review. Please try again.');
+        console.error('Error:', error);
       });
-
-      if (!response.ok) throw new Error('Failed to update review');
-      toast.success('Review updated successfully');
-      navigate('/myReviews');
-    } catch (error) {
-      toast.error('Failed to update review. Please try again.');
-      console.error('Error:', error);
-    }
   };
+  
 
   return (
     <div

@@ -16,7 +16,7 @@ const MyReviews = () => {
     const fetchReviews = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/reviews?email=${user.email}`
+          `https://chill-gamer-omega.vercel.app/reviews?email=${user.email}`
         );
         if (!response.ok) throw new Error("Failed to fetch reviews");
         const data = await response.json();
@@ -46,7 +46,7 @@ const MyReviews = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const response = await fetch(`http://localhost:5000/reviews/${id}`, {
+          const response = await fetch(`https://chill-gamer-omega.vercel.app/reviews/${id}`, {
             method: "DELETE",
           });
           if (!response.ok) throw new Error("Failed to delete review");
@@ -65,8 +65,8 @@ const MyReviews = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 bg-gray-900 text-gray-200 min-h-screen">
-      <h1 className="text-2xl font-bold text-center mb-6 text-white">
+    <div className="container mx-auto px-4 py-8  min-h-screen">
+      <h1 className="text-4xl font-bold text-center mb-6">
         My Reviews
       </h1>
 
