@@ -27,9 +27,9 @@ const HighestRated = () => {
   };
 
   return (
-    <div className="container mx-auto mb-10 mt-20">
+    <div className="container mx-auto mb-10 mt-10">
       <h2 className="text-4xl font-bold text-center mb-2">Highest Rated Games</h2>
-      <p className="text-center text-gray-500 text-lg">
+      <p className="text-center text-gray-500 text-lg mb-5">
         Discover the most loved games as rated by players across the globe. Only the best make it to the top!
       </p>
 

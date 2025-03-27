@@ -44,7 +44,7 @@ const Banner = () => {
   ];
 
   return (
-    <div className="banner h-[600px] mb-10 relative overflow-hidden rounded-lg">
+    <div className="banner h-[600px] relative overflow-hidden rounded-lg">
       <Slider {...settings}>
         {banners.map((banner, index) => (
           <div
